@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="4" verbose="3" name="Failed suite [TestAll]" parallel="tests">
+  <test name="TestA(failed)" parallel="tests">
+    <classes>
+      <class name="prac.A">
+        <methods>
+          <include name="fetchdata"/>
+        </methods>
+      </class> <!-- prac.A -->
+    </classes>
+  </test> <!-- TestA(failed) -->
+</suite> <!-- Failed suite [TestAll] -->

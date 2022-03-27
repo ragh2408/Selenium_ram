@@ -1,0 +1,38 @@
+    <project name="snapdeal" default="runTests" basedir=".">
+    <property name="lib.dir" value="${basedir}/jars"/>	
+    <property name="build.dir" value="${basedir}/build"/>
+     <property name="src.dir" value="${basedir}/src"/>
+     <property name="res.dir" value="${basedir}/Results"/>
+
+    <target name="setClassPath">
+        <path id="classpath_jars">
+            <pathelement path="${basedir}/" />
+            <fileset dir="${lib.dir}" includes="*.jar" />
+        </path>
+        <pathconvert pathsep=":" property="test.classpath" refid="classpath_jars" />
+    </target>
+<target name="clean">
+<echo message="delete existing build directory"/>
+<delete dir="${build.dir}"/>
+
+</target>
+
+    <target name="loadTestNG" depends="setClassPath">
+        <taskdef resource="testngtasks" classpath="${test.classpath}"/>
+    </target>
+ <target name="compile" depends="clean,loadTestNG">
+<mkdir dir="${build.dir}"/>
+<echo message="classpath:${test.classpath}"/>
+<echo message="compiling"/>
+<javac destdir="${build.dir}" srcdir="${src.dir}">
+<classpath refid="classpath_jars"/>
+</javac>
+ </target>
+    <target name="runTests" depends="compile">
+        <testng classpath="${test.classpath}:${build.dir}" outputDir="${res.dir}/test-output">
+            <xmlfileset dir="${basedir}" includes="testng.xml"/>
+        </testng>
+    </target>
+	
+    
+</project>
